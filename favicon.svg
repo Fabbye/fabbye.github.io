@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style>path{fill:#bf3f28}circle{fill:#fbf9f4}@media (prefers-color-scheme:dark){path{fill:#e0644a}circle{fill:#161b21}}</style>
+  <path d="M12 2.5 22.5 20.5h-21Z"/>
+  <circle cx="12" cy="14.4" r="2.3"/>
+</svg>

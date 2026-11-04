@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Beșca;Fabian;;;
+FN:Fabian Beșca
+TITLE:GIS and Remote Sensing Specialist
+ORG:University of Iceland
+EMAIL;TYPE=INTERNET,WORK:fabian@hi.is
+ADR;TYPE=WORK:;;;Reykjavík;;;Iceland
+URL:https://fabbye.github.io/
+item1.URL:https://github.com/Fabbye
+item1.X-ABLabel:GitHub
+NOTE:GIS and Remote Sensing specialist at the University of Iceland\, linking IT and Earth Sciences.
+END:VCARD

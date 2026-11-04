@@ -1,0 +1,574 @@
+/* Fonts: Source Serif 4 and IBM Plex Mono, SIL Open Font License (see fonts/) */
+@font-face {
+  font-family: "Source Serif 4 Display";
+  src: url("fonts/source-serif-4-display-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-italic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/ibm-plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/ibm-plex-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --desk: #e6e3dc;
+  --card: #fbf9f4;
+  --ink: #1d252e;
+  --ink-2: #47515c;
+  --ink-3: #5a636d;
+  --rule: #dad4c8;
+  --sea: #dfe8eb;
+  --water: #2c6a8e;
+  --contour: #a5683f;
+  --accent: #bf3f28;
+  --bar: #857d70;
+  --shadow:
+    0 0 0 1px rgb(40 34 24 / 0.06),
+    0 1px 2px rgb(40 34 24 / 0.06),
+    0 8px 18px -8px rgb(40 34 24 / 0.2),
+    0 28px 56px -24px rgb(40 34 24 / 0.32);
+
+  --serif: "Source Serif 4", Charter, "Iowan Old Style", Georgia, serif;
+  --display: "Source Serif 4 Display", var(--serif);
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --desk: #0d1115;
+    --card: #161b21;
+    --ink: #ebe7de;
+    --ink-2: #b9c0c8;
+    --ink-3: #8f98a2;
+    --rule: #2a313a;
+    --sea: #0f1d26;
+    --water: #7aaecb;
+    --contour: #c79466;
+    --accent: #e0644a;
+    --bar: #5f6873;
+    --shadow:
+      0 0 0 1px rgb(255 255 255 / 0.06),
+      0 1px 2px rgb(0 0 0 / 0.4),
+      0 10px 24px -8px rgb(0 0 0 / 0.55),
+      0 30px 60px -24px rgb(0 0 0 / 0.65);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--serif);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--rule);
+  transition: text-decoration-color 0.15s, color 0.15s;
+}
+a:hover {
+  text-decoration-color: var(--accent);
+}
+a:focus-visible,
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.trig {
+  display: block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  color: var(--accent);
+}
+
+main {
+  padding: clamp(28px, 8vh, 96px) 16px 0;
+}
+
+/* The two sides of the card */
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: clamp(20px, 3.2vw, 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+}
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 85 / 55;
+  margin: 0;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* Container units resolve against the card only from inside it, so the padding sits on .face */
+.front {
+  display: grid;
+}
+.face {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5cqi;
+  padding: 7cqi 7.5cqi;
+}
+.face > .trig {
+  position: absolute;
+  top: 7.4cqi;
+  right: 7.5cqi;
+  width: clamp(16px, 4.2cqi, 23px);
+  height: clamp(16px, 4.2cqi, 23px);
+}
+
+.name {
+  margin: 0 0 0.42em;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(27px, 7.4cqi, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+}
+.role,
+.org,
+.tagline {
+  margin: 0;
+  font-size: clamp(14.5px, 3.4cqi, 19px);
+  line-height: 1.42;
+}
+.org {
+  color: var(--ink-2);
+}
+.tagline {
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: clamp(12px, 2.6cqi, 14px);
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.contact a {
+  color: var(--ink);
+}
+
+.back {
+  overflow: hidden;
+}
+
+/* Map styling; the map itself is drawn by map/make_map.py */
+
+.map {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.map .sea {
+  fill: var(--sea);
+}
+.map .contour {
+  fill: none;
+  stroke: var(--contour);
+  stroke-width: 1.4;
+  stroke-opacity: 0.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.map .contour.index {
+  stroke-width: 2.6;
+  stroke-opacity: 0.78;
+}
+.map .coast {
+  fill: none;
+  stroke: var(--water);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.map .label {
+  font-family: var(--serif);
+  font-size: 44px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 12px;
+  stroke-linejoin: round;
+}
+.map .label.place,
+.map .label.peak {
+  font-weight: 600;
+  font-size: 38px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.map .label.water {
+  font-style: italic;
+  fill: var(--water);
+  stroke: var(--sea);
+}
+.map .poi {
+  color: var(--accent);
+}
+@container (max-width: 460px) {
+  .map .label {
+    font-size: 60px;
+    stroke-width: 14px;
+  }
+  .map .label.place,
+  .map .label.peak {
+    font-size: 50px;
+    letter-spacing: 0.22em;
+  }
+  .map .contour {
+    stroke-width: 2;
+  }
+  .map .contour.index {
+    stroke-width: 3.4;
+  }
+  .map .coast {
+    stroke-width: 3.2;
+  }
+}
+
+/* The key sits on the sea. Its sea-coloured plate only shows on small cards,
+   where the text reaches the coast of Kjalarnes. */
+.map-key {
+  position: absolute;
+  top: 6.6cqi;
+  left: 6.8cqi;
+  display: grid;
+  gap: 0.35em;
+  margin: -0.6em -0.8em;
+  padding: 0.6em 0.8em 0.75em;
+  border-radius: 6px;
+  background: var(--sea);
+  font-family: var(--mono);
+  font-size: clamp(10px, 2.25cqi, 12.5px);
+  line-height: 1.3;
+  color: var(--ink);
+}
+.map-key .poi-name {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: 500;
+}
+.map-key .trig {
+  width: 1.15em;
+  height: 1.15em;
+}
+.map-key .coords {
+  padding-left: 1.75em;
+  color: var(--ink-2);
+}
+.scale {
+  position: relative;
+  width: var(--scale-width);
+  margin: 1.4em 0 0 1.75em;
+  font-size: 0.86em;
+  color: var(--ink-2);
+}
+.north {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% + 1.1em);
+  width: 0.9em;
+  height: 1.3em;
+  fill: var(--ink);
+}
+.scale-bar {
+  display: block;
+  height: max(4px, 1.1cqi);
+  border: 1px solid var(--ink);
+  background: linear-gradient(90deg, var(--ink) 50%, transparent 50%);
+}
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4em;
+}
+
+/* Actions */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: clamp(28px, 4vw, 44px) auto 0;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0 1.15em;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font: 500 0.875rem/1 var(--mono);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.button:hover {
+  border-color: var(--ink-3);
+}
+.button.primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--card);
+}
+.button.primary:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.button svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* About */
+
+.about {
+  max-width: 740px;
+  margin: clamp(56px, 9vw, 104px) auto 0;
+}
+.intro {
+  margin: 0 0 clamp(36px, 5vw, 52px);
+  font-size: clamp(1.18rem, 1.05rem + 0.55vw, 1.4rem);
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.6rem 2rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 640px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.section h2 {
+  margin: 0.32rem 0 0;
+  font: 500 0.75rem/1.6 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.item + .item {
+  margin-top: 1.4rem;
+}
+.item h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.item p {
+  margin: 0.2rem 0 0;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* Time saved by the cadaster tools: emphasis bars on one baseline */
+
+.savings {
+  margin: 1rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 8.4em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75em;
+  min-height: 1.9em;
+}
+.bar-label {
+  color: var(--ink-2);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.bar-fill {
+  flex: none;
+  width: calc((100% - 7.5em) * var(--v));
+  min-width: 3px;
+  height: 10px;
+  border-radius: 0 4px 4px 0;
+  background: var(--bar);
+}
+.bar-fill.accent {
+  background: var(--accent);
+}
+.bar-value {
+  white-space: nowrap;
+  color: var(--ink);
+  font-weight: 500;
+}
+.savings figcaption {
+  margin-top: 0.45rem;
+  font-family: var(--serif);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+.tools {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+}
+.tools dt {
+  font-weight: 600;
+}
+.tools dd {
+  margin: 0.1rem 0 0;
+  color: var(--ink-2);
+}
+
+.education {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.education li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.1rem 1.5rem;
+}
+.education strong {
+  display: block;
+  font-weight: 600;
+}
+.education li > span:first-child {
+  color: var(--ink-2);
+}
+.education .year {
+  font: 400 0.8125rem/1.5 var(--mono);
+  color: var(--ink-3);
+}
+
+footer {
+  max-width: 740px;
+  margin: clamp(48px, 7vw, 80px) auto 0;
+  padding: 1.5rem 16px 3rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+@media (min-width: 772px) {
+  footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+footer p {
+  margin: 0 0 0.5rem;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+  .actions {
+    display: none;
+  }
+  .card {
+    box-shadow: 0 0 0 0.5pt #999;
+    break-inside: avoid;
+  }
+}

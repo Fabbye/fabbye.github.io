@@ -180,13 +180,6 @@ main {
   gap: 5cqi;
   padding: 7cqi 7.5cqi;
 }
-.face > .trig {
-  position: absolute;
-  top: 7.4cqi;
-  right: 7.5cqi;
-  width: clamp(16px, 4.2cqi, 23px);
-  height: clamp(16px, 4.2cqi, 23px);
-}
 
 .name {
   margin: 0 0 0.42em;
